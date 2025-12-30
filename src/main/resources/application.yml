@@ -1,6 +1,6 @@
 spring:
   datasource:
-    driver-class-name: oracle.jdbc.driver.OracleDriver
+    driver-class-name: oracle.jdbc.OracleDriver
     # Change the colon to a slash here
     url: jdbc:oracle:thin:@localhost:1521/freepdb1  # <-- THIS IS THE FIX
     username: scott

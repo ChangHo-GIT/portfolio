@@ -4,6 +4,7 @@ import { Routes, Route, NavLink, useLocation } from 'react-router-dom'; // useLo
 import HomePage from './pages/HomePage';
 import AdminPage from './pages/AdminPage';
 import AdminLoginPage from './pages/AdminLoginPage';
+import Chatbot from './components/Chatbot'; // 💡 1. 챗봇 임포트 추가!
 import './index.css'; // 전역 CSS
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
                     />
                 </Routes>
             </main>
+            <Chatbot />
 
             {/* 푸터 */}
             <footer style={styles.footer}>
