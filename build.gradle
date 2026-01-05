@@ -29,6 +29,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+<<<<<<< HEAD
+=======
+    implementation 'org.springframework.boot:spring-boot-starter-security' // 추가됨
+>>>>>>> 08363241cb8fd388720ec4e6b16b7d5e0c05c6fe
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     //runtimeOnly 'com.h2database:h2'
