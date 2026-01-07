@@ -3,8 +3,8 @@ import axios from 'axios';
 import './HomePage.css';
 
 const API_BASE_URL = 'http://localhost:8080/api';
-// 💡 추가: 백엔드 WebConfig에서 설정한 이미지 경로입니다.
 const IMAGE_SERVER_URL = 'http://localhost:8080/uploads';
+
 const processSteps = [
     {
         id: 1, title: "의뢰 (Request)", icon: "🤝",
@@ -51,11 +51,9 @@ const ProductImageWithRatio = ({ product }) => {
         <div className="product-image-container" style={{ paddingTop: `${imageRatio}%` }}>
             <img
                 ref={imgRef}
-                // 💡 수정: 로컬 /images/ 대신 서버 주소를 사용합니다.
                 src={`${IMAGE_SERVER_URL}/${product.imageFileName}`}
                 alt={product.name}
                 className="product-image"
-                // 💡 수정: 로드 실패 시 숨기는 대신 대체 이미지를 보여줄 수도 있습니다.
                 onError={(e) => { e.target.src = 'https://via.placeholder.com/300x200?text=No+Image'; }}
             />
         </div>
@@ -93,7 +91,6 @@ const ExpandedProductCard = ({ product, onClose }) => {
                 <div className="expanded-image-container" style={{ paddingTop: `${imageRatio}%` }}>
                     <img
                         ref={imgRef}
-                        // 💡 수정: 서버 주소를 사용합니다.
                         src={`${IMAGE_SERVER_URL}/${product.imageFileName}`}
                         alt={product.name}
                         className="expanded-product-image"
@@ -114,7 +111,7 @@ const ExpandedProductCard = ({ product, onClose }) => {
 
 function HomePage() {
     const [companyInfo, setCompanyInfo] = useState(null);
-    const [notices, setNotices] = useState([]);
+    // notices 관련 state 제거됨
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
     const [expandedProduct, setExpandedProduct] = useState(null);
@@ -124,8 +121,7 @@ function HomePage() {
             try {
                 const companyRes = await axios.get(`${API_BASE_URL}/company-info`);
                 setCompanyInfo(companyRes.data);
-                const noticesRes = await axios.get(`${API_BASE_URL}/notices`);
-                setNotices(noticesRes.data);
+                // 공지사항 로드 부분 제거됨
                 const productsRes = await axios.get(`${API_BASE_URL}/products`);
                 setProducts(productsRes.data);
                 setError(null);
@@ -143,7 +139,6 @@ function HomePage() {
             {/* 히어로 섹션 */}
             {companyInfo && (
                 <section className="hero-section">
-                    {/* 히어로 배경은 public/images에 있다면 그대로 둡니다. */}
                     <img src="/images/hero-background.jpg" alt="Steel Mill Background" className="hero-image" />
                     <div className="hero-content">
                         <h1>{companyInfo.name}</h1>
@@ -180,7 +175,6 @@ function HomePage() {
                                 )}
                                 <div className="product-card-body">
                                     <h3>{product.name}</h3>
-                                    {/* 글자수가 너무 많을 경우를 대비해 자르기 유지 */}
                                     <p className="product-description">
                                         {product.description.length > 80
                                             ? `${product.description.substring(0, 80)}...`
@@ -193,46 +187,29 @@ function HomePage() {
                     </div>
                 ) : <p>등록된 제품이 없습니다.</p>}
             </div>
-            {/* ⭐ 가로 정렬로 수정된 제조 공정 섹션 */}
+
+            {/* 제조 공정 섹션 */}
             <div className="info-section">
                 <h2>제조 공정</h2>
                 <div className="process-horizontal-container">
                     {processSteps.map((step, index) => (
                         <div key={step.id} className="process-step-box">
-                            {/* 상단 타이틀 영역 */}
                             <div className="process-step-header">
                                 <span className="step-icon">{step.icon}</span>
                                 <h3>{step.title}</h3>
                             </div>
-
-                            {/* 상세 내용 리스트 영역 */}
                             <ul className="process-detail-list">
                                 {step.details.map((detail, idx) => (
                                     <li key={idx}>{detail}</li>
                                 ))}
                             </ul>
-
-                            {/* 단계 사이 화살표 (마지막 제외) */}
                             {index < processSteps.length - 1 && <div className="process-arrow">▶</div>}
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* 공지사항 섹션 */}
-            <div className="info-section">
-                <h2>공지사항</h2>
-                {notices.length > 0 ? (
-                    <ul className="notice-list">
-                        {notices.map(notice => (
-                            <li key={notice.id} className="notice-item">
-                                <strong>{notice.title}</strong>
-                                <p>{notice.content}</p>
-                            </li>
-                        ))}
-                    </ul>
-                ) : <p>등록된 공지사항이 없습니다.</p>}
-            </div>
+            {/* ⭐ [삭제됨] 하단 공지사항 섹션 제거 완료 */}
 
             <ExpandedProductCard product={expandedProduct} onClose={() => setExpandedProduct(null)} />
         </div>
