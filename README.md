@@ -1,13 +1,8 @@
-📅 프로젝트 개요
+📊 프로젝트 개요
 프로젝트명: ROOT STATION (루트 스테이션)
-개발 기간: 2025.12.29 ~ 2026.2.1 (약 5주)
-팀원: [김태현] (Full Stack & AI Integration)
-주요 컨셉: Cyberpunk & Tech 테마의 프리미엄 조립 PC 샵
-🛠️ Tech Stack (기술 스택)
-Frontend
-  
 
-Backend
-   
+개발 기간: 2025.12.29 ~ 2026.02.01 (약 5주)
 
-Database
+역할: PL(Project Leader) - (Full Stack Development & System Architecture)
+
+주요 성과: DTO 패턴 도입을 통한 보안 강화, 동적 렌더링 기반의 UX 최적화
